@@ -13,7 +13,7 @@ bot = commands.Bot(command_prefix=".", intents=discord.Intents.all())
 
 # Print to console when bot successfully logs in
 @bot.event
-async def on_ready():
+async def on_ready() -> None:
     print(f"Bot ready! Logged in as {bot.user}")
     return
 
@@ -32,5 +32,12 @@ async def whoami(ctx) -> None:
     return
 
 
-# Run the bot
+# Command to display bot latency
+@bot.command()
+async def ping(ctx) -> None:
+    await ctx.send(f":ping_pong: *Pong!* Bot ping: {bot.latency*1000} MS")
+    return
+
+
+# Run the bot after defining commands and listeners
 bot.run(token=token)
