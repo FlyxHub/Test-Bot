@@ -35,7 +35,7 @@ async def whoami(ctx) -> None:
 # Command to display bot latency
 @bot.command()
 async def ping(ctx) -> None:
-    await ctx.send(f":ping_pong: *Pong!* Bot ping: {bot.latency*1000} MS")
+    await ctx.send(f":ping_pong: *Pong!* Bot ping: {int(bot.latency*1000)} MS")
     return
 
 
