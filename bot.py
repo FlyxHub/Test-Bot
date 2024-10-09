@@ -89,7 +89,7 @@ async def rps(ctx, choice: str) -> None:
 @rps.error
 async def rpsError(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('You must pick either "rock", "paper", or "scissors"!')
+        await ctx.send('You must pick either rock, paper, or scissors.')
         return
     else:
         await ctx.send(f"An error occurred. Try again later.")
