@@ -49,47 +49,28 @@ async def rps(ctx, choice: str) -> None:
     botPick = random.choice(options)
 
     if choice not in options:
-        await ctx.send('You must pick either "rock", "paper", or "scissors"!')
+        await ctx.send("You must pick either rock, paper, or scissors!")
         return
-    else:
-        pass
 
     if choice == botPick:
         await ctx.send(f"**{botPick.title()}!** It's a tie!")
         return
+
+    winConditions = {"rock": "scissors", "paper": "rock", "scissors": "paper"}
+
+    if winConditions[choice] == botPick:
+        await ctx.send(f"**{botPick.title()}!** You win!")
+        return
     else:
-        pass
-
-    while choice == "rock":
-        if botPick == "paper":
-            await ctx.send(f"**{botPick.title()}!** You lose!")
-            return
-        else:
-            await ctx.send(f"**{botPick.title()}!** You win!")
-            return
-
-    while choice == "paper":
-        if botPick == "rock":
-            await ctx.send(f"**{botPick.title()}!** You win!")
-            return
-        else:
-            await ctx.send(f"**{botPick.title()}!** You lose!")
-            return
-
-    while choice == "scissors":
-        if botPick == "rock":
-            await ctx.send(f"**{botPick.title()}!** You win!")
-            return
-        else:
-            await ctx.send(f"**{botPick.title()}!** You lose!")
-            return
+        await ctx.send(f"**{botPick.title()}!** You lose!")
+        return
 
 
 # Error handler for rps command
 @rps.error
 async def rpsError(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('You must pick either rock, paper, or scissors.')
+        await ctx.send("You must pick either rock, paper, or scissors.")
         return
     else:
         await ctx.send(f"An error occurred. Try again later.")
