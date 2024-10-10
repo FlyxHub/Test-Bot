@@ -42,15 +42,16 @@ async def ping(ctx) -> None:
 
 # Rock Paper Scissors game
 @bot.command()
-async def rps(ctx, choice: str) -> None:
-    choice = choice.lower()
+async def rps(ctx, choice: str = None) -> None:
     options = ["rock", "paper", "scissors"]
 
     botPick = random.choice(options)
 
-    if choice not in options:
+    if choice.lower() not in options or not choice:
         await ctx.send("You must pick either rock, paper, or scissors.")
         return
+
+    choice = choice.lower()
 
     if choice == botPick:
         await ctx.send(f"**{botPick.title()}!** It's a tie!")
@@ -63,17 +64,6 @@ async def rps(ctx, choice: str) -> None:
         return
     else:
         await ctx.send(f"**{botPick.title()}!** You lose!")
-        return
-
-
-# Error handler for rps command
-@rps.error
-async def rpsError(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("You must pick either rock, paper, or scissors.")
-        return
-    else:
-        await ctx.send(f"An error occurred. Try again later.")
         return
 
 
