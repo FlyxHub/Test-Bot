@@ -49,7 +49,7 @@ async def rps(ctx, choice: str) -> None:
     botPick = random.choice(options)
 
     if choice not in options:
-        await ctx.send("You must pick either rock, paper, or scissors!")
+        await ctx.send("You must pick either rock, paper, or scissors.")
         return
 
     if choice == botPick:
