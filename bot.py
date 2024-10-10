@@ -29,7 +29,17 @@ async def hello(ctx) -> None:
 # Command to tell the user who they are
 @bot.command()
 async def whoami(ctx) -> None:
-    await ctx.send(f"You are {ctx.author.mention}")
+    embed = discord.Embed(
+        title=f"You are {ctx.author.display_name}!",
+        description="Here's what I know about you:",
+        color=ctx.author.top_role.color,
+    )
+    embed.add_field(name="Nickname:", value=ctx.author.display_name, inline=False)
+    embed.add_field(name="Real username:", value=ctx.author)
+    embed.set_thumbnail(url=ctx.author.display_avatar.url)
+    embed.set_footer(text=f"UID: {ctx.author.id}")
+
+    await ctx.send(embed=embed)
     return
 
 
